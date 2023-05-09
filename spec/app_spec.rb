@@ -60,4 +60,20 @@ describe Application do
     end
   end
 
+#   context 'POST /signup' do
+#     it 'creates a new user' do
+#         response = post('/signup', name: 'Pippa Long', username: 'Longstockings', email: 'piplong@gmail.com', password:)
+#     end
+#   end
+
+  context 'GET /shoutybox' do
+    it 'returns page with peeps in revers chronological order' do
+        response = get('/shoutybox')
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>SHOUTYBOX</h1>')
+
+    end
+  end
+
 end

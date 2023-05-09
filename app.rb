@@ -31,5 +31,14 @@ class Application < Sinatra::Base
     return erb(:signup)
   end
 
+  get '/shoutybox' do
+    posts = PostRepository.new
+    @users = UserRepository.new
+
+    @peeps = posts.all.reverse
+
+    return erb(:shoutybox)
+  end
+
 
 end

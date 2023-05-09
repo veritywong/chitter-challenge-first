@@ -44,9 +44,7 @@ RSpec.describe PostRepository do
 
         expect(post.peep).to eq('this is my first post')
         expect(post.time).to eq('2023-01-08 10:30:00')
-
       end
     end
-
 
 end
