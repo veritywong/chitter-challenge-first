@@ -1,6 +1,7 @@
 require 'user_repository'
 require 'user'
 
+
 RSpec.describe UserRepository do
   def reset_users_table
       seed_sql = File.read('spec/seeds.sql')
@@ -45,6 +46,16 @@ RSpec.describe UserRepository do
 
         expect(user.name).to eq('John Smith')
         expect(user.username).to eq('JS')
+      end
+
+      it 'finds user 1 with peeps' do
+        repo = UserRepository.new
+        user_with_peeps = repo.find_with_peeps(1)
+
+        peep = double :post, id: 1, peep: 'Hello World', time: '2023-01-08 10:30:00'
+
+        expect(peep.id).to eq(1)
+        expect(peep.time).to eq('2023-01-08 10:30:00')
       end
     end
 

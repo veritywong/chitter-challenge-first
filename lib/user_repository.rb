@@ -23,9 +23,35 @@ class UserRepository
     end
 
     def create(user)
-        sql = 'INSERT INTO users (name, username, email, password) VALUES ($1, $2, $3, $4);'
-        result_set = DatabaseConnection.exec_params(sql, [user.name, user.username, user.email, user.password])
+      sql = 'INSERT INTO users (name, username, email, password) VALUES ($1, $2, $3, $4);'
+
+      encrypted_password = BCrypt::Password.create(user.password)
+      sql_params = [user.name, user.username, user.email, encrypted_password]
+
+      result = DatabaseConnection.exec_params(sql, sql_params)
     
+      return nil
+    end
+
+    def find(id)
+        sql = 'SELECT id, name, username FROM users WHERE id = $1;'
+        result = DatabaseConnection.exec_params(sql, [id])
+        record = result[0]
+
+        user = User.new
+        user.id = record['id']
+        user.name = record['name']
+        user.username = record['username']
+
         return user
-      end
-end
+    end
+
+    def find_with_peeps(id)
+      sql = 'SELECT posts.id, posts.peep, posts.time
+              FROM posts
+              JOIN users ON posts.user_id = users.id
+              WHERE users.id = $1;'
+      
+      result = DatabaseConnection.exec_params(sql, [id])
+    end
+end 

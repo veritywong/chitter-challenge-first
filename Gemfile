@@ -16,3 +16,5 @@ gem "rack-test", "~> 2.1"
 
 gem 'simplecov', require: false
 gem 'simplecov-console', require: false
+
+gem 'bcrypt', require: true
