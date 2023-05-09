@@ -14,26 +14,26 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-05-09T16:27:35+01:00">2023-05-09T16:27:35+01:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-05-09T16:58:11+01:00">2023-05-09T16:58:11+01:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">98.03%</span></span>
+    (<span class="covered_percent"><span class="green">98.14%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.72
+         1.69
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>8</b> files in total.
-    <b>203</b> relevant lines. 
-    <span class="green"><b>199</b> lines covered</span> and
+    <b>215</b> relevant lines. 
+    <span class="green"><b>211</b> lines covered</span> and
     <span class="red"><b>4</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -53,9 +53,9 @@
       <tr>
         <td class="strong"><a href="#dbf8712866509d9086db74a1bcb6955f8b79b3b8" class="src_link" title="app.rb">app.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>44</td>
-        <td>22</td>
-        <td>22</td>
+        <td>58</td>
+        <td>31</td>
+        <td>31</td>
         <td>0</td>
         <td>1.0</td>
       </tr>
@@ -73,11 +73,11 @@
       <tr>
         <td class="strong"><a href="#aa2ee23724c4bc8335e59ca86ec18bdbf6ce4e8c" class="src_link" title="lib/post_repository.rb">lib/post_repository.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>65</td>
-        <td>33</td>
-        <td>33</td>
+        <td>61</td>
+        <td>30</td>
+        <td>30</td>
         <td>0</td>
-        <td>2.9</td>
+        <td>2.5</td>
       </tr>
       
       <tr>
@@ -97,15 +97,15 @@
         <td>32</td>
         <td>32</td>
         <td>0</td>
-        <td>3.0</td>
+        <td>3.6</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#acfdb3cd822bc720c2a7c41df154bb354d0427e6" class="src_link" title="spec/app_spec.rb">spec/app_spec.rb</a></td>
-        <td class="green strong">90.7 %</td>
-        <td>79</td>
-        <td>43</td>
-        <td>39</td>
+        <td class="green strong">91.84 %</td>
+        <td>84</td>
+        <td>49</td>
+        <td>45</td>
         <td>4</td>
         <td>1.0</td>
       </tr>
@@ -151,8 +151,8 @@
     <h3>app.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>22</b> relevant lines. 
-      <span class="green"><b>22</b> lines covered</span> and
+      <b>31</b> relevant lines. 
+      <span class="green"><b>31</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -361,19 +361,19 @@
         <li class="covered" data-hits="1" data-linenumber="34">
           <span class="hits">1</span>
           
-          <code class="ruby">  get &#39;/shoutybox&#39; do</code>
+          <code class="ruby">  post &#39;/signup&#39; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="35">
           <span class="hits">1</span>
           
-          <code class="ruby">    posts = PostRepository.new</code>
+          <code class="ruby">    users = UserRepository.new</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="36">
           <span class="hits">1</span>
           
-          <code class="ruby">    @users = UserRepository.new</code>
+          <code class="ruby">    new_user = User.new</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="37">
@@ -385,25 +385,25 @@
         <li class="covered" data-hits="1" data-linenumber="38">
           <span class="hits">1</span>
           
-          <code class="ruby">    @peeps = posts.all.reverse</code>
+          <code class="ruby">    new_user.name = params[:name]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="39">
+        <li class="covered" data-hits="1" data-linenumber="39">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">    new_user.username = params[:username]</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="40">
           <span class="hits">1</span>
           
-          <code class="ruby">    return erb(:shoutybox)</code>
+          <code class="ruby">    new_user.email = params[:email]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="41">
+        <li class="covered" data-hits="1" data-linenumber="41">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    new_user.password = params[:password]</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="42">
@@ -412,13 +412,97 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="43">
+        <li class="covered" data-hits="1" data-linenumber="43">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    users.create(new_user)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="44">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="44">
+        <li class="covered" data-hits="1" data-linenumber="45">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    return erb(:signup_confirmation)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="46">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="47">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="48">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  get &#39;/shoutybox&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="49">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    posts = PostRepository.new</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="50">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    @users = UserRepository.new</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="51">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="52">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    @peeps = posts.all.reverse</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="53">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="54">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    return erb(:shoutybox)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="55">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="56">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="57">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="58">
           
           
           <code class="ruby">end</code>
@@ -471,8 +555,8 @@
     <h3>lib/post_repository.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>33</b> relevant lines. 
-      <span class="green"><b>33</b> lines covered</span> and
+      <b>30</b> relevant lines. 
+      <span class="green"><b>30</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -660,211 +744,187 @@
           <code class="ruby">          post.user_id = record[&#39;user_id&#39;]</code>
         </li>
       
-        <li class="covered" data-hits="7" data-linenumber="31">
-          <span class="hits">7</span>
+        <li class="never" data-hits="" data-linenumber="31">
           
-          <code class="ruby">          user = User.new</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="7" data-linenumber="32">
           <span class="hits">7</span>
           
-          <code class="ruby">          user.name = record[&#39;name&#39;]</code>
-        </li>
-      
-        <li class="covered" data-hits="7" data-linenumber="33">
-          <span class="hits">7</span>
-          
-          <code class="ruby">          user.username = record[&#39;username&#39;]</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="34">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="35">
-          
-          
-          <code class="ruby">          # posts &lt;&lt; user</code>
-        </li>
-      
-        <li class="covered" data-hits="7" data-linenumber="36">
-          <span class="hits">7</span>
-          
           <code class="ruby">          posts &lt;&lt; post</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="37">
+        <li class="never" data-hits="" data-linenumber="33">
           
           
           <code class="ruby">        end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="38">
+        <li class="never" data-hits="" data-linenumber="34">
           
           
           <code class="ruby">    </code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="39">
+        <li class="covered" data-hits="3" data-linenumber="35">
           <span class="hits">3</span>
           
           <code class="ruby">        posts</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="40">
+        <li class="never" data-hits="" data-linenumber="36">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="41">
+        <li class="never" data-hits="" data-linenumber="37">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="42">
+        <li class="never" data-hits="" data-linenumber="38">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="43">
+        <li class="covered" data-hits="1" data-linenumber="39">
           <span class="hits">1</span>
           
           <code class="ruby">    def create(post)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="44">
+        <li class="covered" data-hits="1" data-linenumber="40">
           <span class="hits">1</span>
           
           <code class="ruby">        sql = &#39;INSERT INTO posts (peep, time, user_id) VALUES ($1, $2, $3);&#39;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="45">
+        <li class="covered" data-hits="1" data-linenumber="41">
           <span class="hits">1</span>
           
           <code class="ruby">        result_set = DatabaseConnection.exec_params(sql, [post.peep, post.time, post.user_id])</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="46">
+        <li class="never" data-hits="" data-linenumber="42">
           
           
           <code class="ruby">    </code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="47">
+        <li class="covered" data-hits="1" data-linenumber="43">
           <span class="hits">1</span>
           
           <code class="ruby">        return post</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="48">
+        <li class="never" data-hits="" data-linenumber="44">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="49">
+        <li class="never" data-hits="" data-linenumber="45">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="50">
+        <li class="covered" data-hits="1" data-linenumber="46">
           <span class="hits">1</span>
           
           <code class="ruby">    def find(id)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="51">
+        <li class="covered" data-hits="1" data-linenumber="47">
           <span class="hits">1</span>
           
           <code class="ruby">      sql = &#39;SELECT id, peep, time, user_id FROM posts WHERE id = $1;&#39;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="52">
+        <li class="covered" data-hits="1" data-linenumber="48">
           <span class="hits">1</span>
           
           <code class="ruby">      sql_params = [id]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="53">
+        <li class="covered" data-hits="1" data-linenumber="49">
           <span class="hits">1</span>
           
           <code class="ruby">      result = DatabaseConnection.exec_params(sql, sql_params)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="54">
+        <li class="covered" data-hits="1" data-linenumber="50">
           <span class="hits">1</span>
           
           <code class="ruby">      record = result[0]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="55">
+        <li class="never" data-hits="" data-linenumber="51">
           
           
           <code class="ruby">      </code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="56">
+        <li class="covered" data-hits="1" data-linenumber="52">
           <span class="hits">1</span>
           
           <code class="ruby">      post = Post.new</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="57">
+        <li class="covered" data-hits="1" data-linenumber="53">
           <span class="hits">1</span>
           
           <code class="ruby">      post.id = record[&#39;id&#39;]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="58">
+        <li class="covered" data-hits="1" data-linenumber="54">
           <span class="hits">1</span>
           
           <code class="ruby">      post.peep = record[&#39;peep&#39;]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="59">
+        <li class="covered" data-hits="1" data-linenumber="55">
           <span class="hits">1</span>
           
           <code class="ruby">      post.time = record[&#39;time&#39;]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="60">
+        <li class="covered" data-hits="1" data-linenumber="56">
           <span class="hits">1</span>
           
           <code class="ruby">      post.user_id = record[&#39;user_id&#39;]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="61">
+        <li class="never" data-hits="" data-linenumber="57">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="62">
+        <li class="covered" data-hits="1" data-linenumber="58">
           <span class="hits">1</span>
           
           <code class="ruby">      return post</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="63">
+        <li class="never" data-hits="" data-linenumber="59">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="64">
+        <li class="never" data-hits="" data-linenumber="60">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="65">
+        <li class="never" data-hits="" data-linenumber="61">
           
           
           <code class="ruby">end</code>
@@ -1190,8 +1250,8 @@
           <code class="ruby">    def create(user)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="26">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="26">
+          <span class="hits">2</span>
           
           <code class="ruby">      sql = &#39;INSERT INTO users (name, username, email, password) VALUES ($1, $2, $3, $4);&#39;</code>
         </li>
@@ -1202,14 +1262,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="28">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="28">
+          <span class="hits">2</span>
           
           <code class="ruby">      encrypted_password = BCrypt::Password.create(user.password)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="29">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="29">
+          <span class="hits">2</span>
           
           <code class="ruby">      sql_params = [user.name, user.username, user.email, encrypted_password]</code>
         </li>
@@ -1220,8 +1280,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="31">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="31">
+          <span class="hits">2</span>
           
           <code class="ruby">      result = DatabaseConnection.exec_params(sql, sql_params)</code>
         </li>
@@ -1256,20 +1316,20 @@
           <code class="ruby">    def find(id)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="37">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="37">
+          <span class="hits">5</span>
           
           <code class="ruby">        sql = &#39;SELECT id, name, username FROM users WHERE id = $1;&#39;</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="38">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="38">
+          <span class="hits">5</span>
           
           <code class="ruby">        result = DatabaseConnection.exec_params(sql, [id])</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="39">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="39">
+          <span class="hits">5</span>
           
           <code class="ruby">        record = result[0]</code>
         </li>
@@ -1280,26 +1340,26 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="41">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="41">
+          <span class="hits">5</span>
           
           <code class="ruby">        user = User.new</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="42">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="42">
+          <span class="hits">5</span>
           
           <code class="ruby">        user.id = record[&#39;id&#39;]</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="43">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="43">
+          <span class="hits">5</span>
           
           <code class="ruby">        user.name = record[&#39;name&#39;]</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="44">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="44">
+          <span class="hits">5</span>
           
           <code class="ruby">        user.username = record[&#39;username&#39;]</code>
         </li>
@@ -1310,8 +1370,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="46">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="46">
+          <span class="hits">5</span>
           
           <code class="ruby">        return user</code>
         </li>
@@ -1390,10 +1450,10 @@
         <div class="source_table" id="acfdb3cd822bc720c2a7c41df154bb354d0427e6">
   <div class="header">
     <h3>spec/app_spec.rb</h3>
-    <h4><span class="green">90.7 %</span> covered</h4>
+    <h4><span class="green">91.84 %</span> covered</h4>
     <div>
-      <b>43</b> relevant lines. 
-      <span class="green"><b>39</b> lines covered</span> and
+      <b>49</b> relevant lines. 
+      <span class="green"><b>45</b> lines covered</span> and
       <span class="red"><b>4</b> lines missed.</span>
     </div>
   </div>
@@ -1461,8 +1521,8 @@
           <code class="ruby">  # class so our tests work.</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="11">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="6" data-linenumber="11">
+          <span class="hits">6</span>
           
           <code class="ruby">  let(:app) { Application.new }</code>
         </li>
@@ -1773,103 +1833,133 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="63">
+        <li class="covered" data-hits="1" data-linenumber="63">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">#   context &#39;POST /signup&#39; do</code>
+          <code class="ruby">  context &#39;POST /signup&#39; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="64">
+        <li class="covered" data-hits="1" data-linenumber="64">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">#     it &#39;creates a new user&#39; do</code>
+          <code class="ruby">    it &#39;creates a new user&#39; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="65">
+        <li class="covered" data-hits="1" data-linenumber="65">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">#         response = post(&#39;/signup&#39;, name: &#39;Pippa Long&#39;, username: &#39;Longstockings&#39;, email: &#39;piplong@gmail.com&#39;, password:)</code>
+          <code class="ruby">        response = post(&#39;/signup&#39;, name: &#39;Pippa Long&#39;, username: &#39;Longstockings&#39;, email: &#39;piplong@gmail.com&#39;, password: &#39;password_test&#39;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="66">
           
           
-          <code class="ruby">#     end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="67">
-          
-          
-          <code class="ruby">#   end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="68">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="69">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  context &#39;GET /shoutybox&#39; do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="70">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &#39;returns page with peeps in revers chronological order&#39; do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="71">
-          <span class="hits">1</span>
-          
-          <code class="ruby">        response = get(&#39;/shoutybox&#39;)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="72">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="73">
+        <li class="covered" data-hits="1" data-linenumber="67">
           <span class="hits">1</span>
           
           <code class="ruby">        expect(response.status).to eq(200)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="74">
+        <li class="covered" data-hits="1" data-linenumber="68">
           <span class="hits">1</span>
           
-          <code class="ruby">        expect(response.body).to include(&#39;&lt;h1&gt;SHOUTYBOX&lt;/h1&gt;&#39;)</code>
+          <code class="ruby">        expect(response.body).to include(&#39;&lt;h1&gt;You have successfully signed up with Chitter&lt;/h1&gt;&#39;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="75">
+        <li class="covered" data-hits="1" data-linenumber="69">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        expect(response.body).to include(&#39;&lt;a href=&quot;/shoutybox&quot;&gt;Shouty Box&lt;br&gt;- see what people are peeping&lt;/a&gt;&#39;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="70">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="76">
+        <li class="never" data-hits="" data-linenumber="71">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="77">
+        <li class="never" data-hits="" data-linenumber="72">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="78">
+        <li class="never" data-hits="" data-linenumber="73">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="79">
+        <li class="covered" data-hits="1" data-linenumber="74">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  context &#39;GET /shoutybox&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="75">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &#39;returns page with peeps in revers chronological order&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="76">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        response = get(&#39;/shoutybox&#39;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="77">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="78">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        expect(response.status).to eq(200)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="79">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        expect(response.body).to include(&#39;&lt;h1&gt;SHOUTYBOX&lt;/h1&gt;&#39;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="80">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="81">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="82">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="83">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="84">
           
           
           <code class="ruby">end</code>
