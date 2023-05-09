@@ -31,7 +31,28 @@ describe Application do
         expect(response.body).to include('<h1>Welcome to Chitter</h1>')
         expect(response.body).to include('<a href="/login">Login</a><br>')
         expect(response.body).to include('<a href="/signup">Signup</a><br>')
-        expect(response.body).to include('<a href="/shoutybox">Shouty Box</a><br>')
+        expect(response.body).to include('<a href="/shoutybox">Shouty Box<br>- see what people are peeping</a>')
+    end
+  end
+
+  context 'GET /login' do
+    it 'returns login page' do
+        response = get('/login')
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>Login</h1>')
+        expect(response.body).to include('<form action="/login" method="POST">')
+        expect(response.body).to include('<input type="text" name="email">')
+        expect(response.body).to include('<input type="text" name="password">')
+    end
+  end
+
+  context 'GET /signup' do
+    it 'returns signup page' do
+        response = get('/signup')
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>Signup</h1>')
     end
   end
 
