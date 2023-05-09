@@ -26,5 +26,21 @@ class PostRepository
         result_set = DatabaseConnection.exec_params(sql, [post.peep, post.time, post.user_id])
     
         return post
-      end
+    end
+
+    def find(id)
+      sql = 'SELECT id, peep, time, user_id FROM posts WHERE id = $1;'
+      sql_params = [id]
+      result = DatabaseConnection.exec_params(sql, sql_params)
+      record = result[0]
+      
+      post = Post.new
+      post.id = record['id']
+      post.peep = record['peep']
+      post.time = record['time']
+      post.user_id = record['user_id']
+
+      return post
+    end
+
 end

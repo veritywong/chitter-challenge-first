@@ -37,6 +37,15 @@ RSpec.describe UserRepository do
         expect(users.length).to eq(4)
         expect(users.last.name).to eq('Penny Lane')
       end
+
+      it 'finds user 1' do
+        repo = UserRepository.new
+
+        user = repo.find(1)
+
+        expect(user.name).to eq('John Smith')
+        expect(user.username).to eq('JS')
+      end
     end
 
 end

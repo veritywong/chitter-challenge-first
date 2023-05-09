@@ -19,7 +19,7 @@ RSpec.describe PostRepository do
         posts = repo.all
           
         expect(posts.length).to eq(2)
-        expect(posts.first.time).to eq('2023-01-08')
+        expect(posts.first.time).to eq('2023-01-08 10:30:00')
       end 
 
       it 'creates a new post' do
@@ -27,7 +27,7 @@ RSpec.describe PostRepository do
     
         new_post = Post.new
         new_post.peep = 'Hello World'
-        new_post.time = '2023-01-10'
+        new_post.time = '2023-01-10 10:00'
         new_post.user_id = '3'
         repo.create(new_post)
         
@@ -36,6 +36,17 @@ RSpec.describe PostRepository do
         expect(posts.length).to eq(3)
         expect(posts.last.user_id).to eq('3')
       end
+
+      it 'finds a post by specific user' do
+        repo = PostRepository.new
+
+        post = repo.find(1)
+
+        expect(post.peep).to eq('this is my first post')
+        expect(post.time).to eq('2023-01-08 10:30:00')
+
+      end
     end
+
 
 end

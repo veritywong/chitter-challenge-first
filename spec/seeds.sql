@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS posts CASCADE;
 CREATE TABLE posts (
   id SERIAL PRIMARY KEY,
   peep text,
-  time date,
+  time timestamp,
   user_id int,
   constraint fk_user foreign key(user_id)
     references users(id)
@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS comments CASCADE;
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     comment text,
-    time date,
+    time timestamp,
     post_id int,
     constraint fk_post foreign key(post_id)
         references posts(id)
@@ -58,11 +58,11 @@ INSERT INTO users (name, username, email, password) VALUES
 ('Nikki Wong', 'NickNack', 'nicknack@gmail.com', 'password2'),
 ('Liam Banks', 'Liam', 'liambanks@gmail.com', 'password3');
 
-INSERT INTO posts (peep, time, user_id) VALUES ('this is my first post', 'Jan-08-2023', 1),
-('Any film recommends?', 'Jan-09-2023', 2);
+INSERT INTO posts (peep, time, user_id) VALUES ('this is my first post', 'Jan-08-2023 10:30', 1),
+('Any film recommends?', 'Jan-09-2023 14:00', 2);
 
-INSERT INTO comments (comment, time, post_id) VALUES ('Welcome to chitter!', 'Jan-08-2023', 1),
-('yes! Everything Everywhere film!', 'Jan-09-2023', 2);
+INSERT INTO comments (comment, time, post_id) VALUES ('Welcome to chitter!', 'Jan-08-2023 11:00', 1),
+('yes! Everything Everywhere film!', 'Jan-09-2023 12:00', 2);
 
 INSERT INTO tags (tag, post_id, user_id) VALUES
 ('NickNack', 1, 2),
