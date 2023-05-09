@@ -14,14 +14,14 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-05-09T14:26:30+01:00">2023-05-09T14:26:30+01:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-05-09T14:32:56+01:00">2023-05-09T14:32:56+01:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">97.3%</span></span>
+    (<span class="covered_percent"><span class="green">97.88%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
@@ -32,9 +32,9 @@
   <a name="AllFiles"></a>
   <div>
     <b>8</b> files in total.
-    <b>185</b> relevant lines. 
-    <span class="green"><b>180</b> lines covered</span> and
-    <span class="red"><b>5</b> lines missed </span>
+    <b>189</b> relevant lines. 
+    <span class="green"><b>185</b> lines covered</span> and
+    <span class="red"><b>4</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -102,12 +102,12 @@
       
       <tr>
         <td class="strong"><a href="#acfdb3cd822bc720c2a7c41df154bb354d0427e6" class="src_link" title="spec/app_spec.rb">spec/app_spec.rb</a></td>
-        <td class="yellow strong">85.29 %</td>
-        <td>59</td>
+        <td class="yellow strong">89.47 %</td>
+        <td>64</td>
+        <td>38</td>
         <td>34</td>
-        <td>29</td>
-        <td>5</td>
-        <td>0.9</td>
+        <td>4</td>
+        <td>1.0</td>
       </tr>
       
       <tr>
@@ -1222,11 +1222,11 @@
         <div class="source_table" id="acfdb3cd822bc720c2a7c41df154bb354d0427e6">
   <div class="header">
     <h3>spec/app_spec.rb</h3>
-    <h4><span class="yellow">85.29 %</span> covered</h4>
+    <h4><span class="yellow">89.47 %</span> covered</h4>
     <div>
-      <b>34</b> relevant lines. 
-      <span class="green"><b>29</b> lines covered</span> and
-      <span class="red"><b>5</b> lines missed.</span>
+      <b>38</b> relevant lines. 
+      <span class="green"><b>34</b> lines covered</span> and
+      <span class="red"><b>4</b> lines missed.</span>
     </div>
   </div>
   
@@ -1557,31 +1557,61 @@
           <code class="ruby">        expect(response.status).to eq(200)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="55">
-          
+        <li class="covered" data-hits="1" data-linenumber="55">
+          <span class="hits">1</span>
           
           <code class="ruby">        expect(response.body).to include(&#39;&lt;h1&gt;Signup&lt;/h1&gt;&#39;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="56">
+        <li class="covered" data-hits="1" data-linenumber="56">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">        expect(response.body).to include(&#39;&lt;input type=&quot;text&quot; name=&quot;name&quot;&gt;&#39;)        </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="57">
+        <li class="covered" data-hits="1" data-linenumber="57">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">end</code>
+          <code class="ruby">        expect(response.body).to include(&#39;&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&#39;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="58">
+        <li class="covered" data-hits="1" data-linenumber="58">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        expect(response.body).to include(&#39;&lt;input type=&quot;text&quot; name=&quot;email&quot;&gt;&#39;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="59">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        expect(response.body).to include(&#39;&lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;&#39;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="60">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="59">
+        <li class="never" data-hits="" data-linenumber="61">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="62">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="63">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="64">
           
           
           <code class="ruby">end</code>

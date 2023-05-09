@@ -53,6 +53,10 @@ describe Application do
 
         expect(response.status).to eq(200)
         expect(response.body).to include('<h1>Signup</h1>')
+        expect(response.body).to include('<input type="text" name="name">')        
+        expect(response.body).to include('<input type="text" name="username">')
+        expect(response.body).to include('<input type="text" name="email">')
+        expect(response.body).to include('<input type="text" name="password">')
     end
   end
 
