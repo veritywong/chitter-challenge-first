@@ -1,4 +1,4 @@
-# Artist Model and Repository Classes Design Recipe
+# Users Model and Repository Classes Design Recipe
 
 _Copy this recipe template to design and implement Model and Repository classes for a database table._
 
@@ -13,10 +13,10 @@ Otherwise, [follow this recipe to design and create the SQL schema for your tabl
 ```
 # EXAMPLE
 
-Table: students
+Table: users
 
 Columns:
-id | name | cohort_name
+id | name | username | email| password
 ```
 
 ## 2. Create Test SQL seeds
@@ -35,16 +35,15 @@ If seed data is provided (or you already created it), you can skip this step.
 -- so we can start with a fresh state.
 -- (RESTART IDENTITY resets the primary key)
 
-TRUNCATE TABLE recipes RESTART IDENTITY; -- replace with your own table name.
+TRUNCATE TABLE users RESTART IDENTITY CASCADE;
 
 -- Below this line there should only be `INSERT` statements.
 -- Replace these statements with your own seed data.
 
-INSERT INTO recipes (name, average_cooking_time, rating) VALUES ('Stir Fry Noodles', '30', '5');
-INSERT INTO recipes (name, average_cooking_time, rating) VALUES ('Baked Potato', '60', '4');
-INSERT INTO recipes (name, average_cooking_time, rating) VALUES ('Carbonara', '30', '4');
-INSERT INTO recipes (name, average_cooking_time, rating) VALUES ('Cacio e pepe', '45', '4');
-INSERT INTO recipes (name, average_cooking_time, rating) VALUES ('Tiramisù', '60', '5');
+INSERT INTO users (name, username, email, password) VALUES
+('John Smith', 'JS', 'js@gmail.com', 'passwordJS'),
+('Nikki Wong', 'NickNack', 'nicknack@gmail.com', 'password2'),
+('Liam Banks', 'Liam', 'liambanks@gmail.com', 'password3');
 ```
 
 Run this SQL file on the database to truncate (empty) the table, and insert the seed data. Be mindful of the fact any existing records in the table will be deleted.
@@ -59,16 +58,16 @@ Usually, the Model class name will be the capitalised table name (single instead
 
 ```ruby
 # EXAMPLE
-# Table name: recipes
+# Table name: users
 
 # Model class
-# (in lib/recipe.rb)
-class Recipe
+# (in lib/user.rb)
+class User
 end
 
 # Repository class
-# (in lib/recipe_repository.rb)
-class RecipeRepository
+# (in lib/user_repository.rb)
+class UserRepository
 end
 ```
 
@@ -85,8 +84,14 @@ Define the attributes of your Model class. You can usually map the table columns
 
 class Recipe
 
-  # Replace the attributes by your own columns.
-  attr_accessor :id, :name, :average_cooking_time, :rating
+  require 'bcrypt'
+
+class User
+  attr_accessor :id, :name, :username, :email, :password
+
+  # users.password_hash in the database is a :string
+  include BCrypt
+
 end
 
 # The keyword attr_accessor is a special Ruby feature
@@ -108,30 +113,35 @@ Using comments, define the method signatures (arguments and return value) and wh
 
 ```ruby
 # EXAMPLE
-# Table name: recipe
+# Table name: users
 
 # Repository class
-# (in lib/recipe_repository.rb)
+# (in lib/user_repository.rb)
 
-class RecipeRepository
+class UserRepository
 
-  # Selecting all records
-  # No arguments
-  def all
-    # Executes the SQL query:
-    # SELECT id, name, genre FROM artists;
+    def all
+    end
 
-    # Returns an array of Artist objects.
-  end
+    def create(user)
 
-  def find(id)
-    # exectures the SQL query:
-    # SELECT id, name, genre FROM artists WHERE id = $1
+    end
 
-    # returns a single Artist object
-  end
+    def find(id)
+    end
 
-end
+    def find_with_peeps(id)
+    end
+
+    def login(email, password)
+    end
+
+    def signup(*)
+    end
+
+    def logout
+    end
+end 
 ```
 
 ## 6. Write Test Examples
@@ -144,43 +154,70 @@ These examples will later be encoded as RSpec tests.
 # EXAMPLES
 
 # 1
-# Get all recipes
+# Gets all users
 
-repo = RecipeRepository.new
-
-recipes = repo.all
-recipes.length # => 5
-recipes.first.id # => '1'
-recipes.first.name # => 'Stir Fry Noodles'
-recipes.first.average_cooking_time # => '30'
-recipes.first.rating # => '5'
-
-recipes.[1].id # => '2'
-recipes.[1].name # => 'Baked Potato'
-recipes.[1].average_cooking_time # => '60'
-recipes.[1].rating # => '4'
-
+      it 'finds all users' do
+        repo = UserRepository.new
+      
+        users = repo.all
+          
+        expect(users.length).to eq(3)
+        expect(users.first.name).to eq('John Smith')
+      end 
 
 # 2
-# Get a single recipe
-repo = RecipeRepository.new
+# Get a single user
+    it 'finds user 1' do
+        repo = UserRepository.new
 
-recipes = repo.find(1)
-recipes.id # => 1
-recipes.name # => 'Stir Fry Noodles'
-recipes.average_cooking_time # => '30'
-recipes.rating # => '5'
+        user = repo.find(1)
+
+        expect(user.name).to eq('John Smith')
+        expect(user.username).to eq('JS')
+      end
 
 # 3
-# Get another single recipe
-repo = RecipeRepository.new
+# Get user 1 with all their peeps
+     it 'finds user 1 with peeps' do
+        repo = UserRepository.new
+        user_with_peeps = repo.find_with_peeps(1)
 
-recipes = repo.find(3)
-recipes.id # => 3
-recipes.name # => 'Carbonara'
-recipes.average_cooking_time # => '30'
-recipes.rating # => '4'
+        peep = double :post, id: 1, peep: 'Hello World', time: '2023-01-08 10:30:00'
 
+        expect(peep.id).to eq(1)
+        expect(peep.time).to eq('2023-01-08 10:30:00')
+      end
+
+# 4
+# Creates a new user
+ it 'creates a new user' do
+        repo = UserRepository.new
+    
+        new_user = User.new
+        new_user.name = 'Penny Lane'
+        new_user.username = 'PLane'
+        new_user.email = 'pl@gmail.com'
+        new_user.password = 'password4'
+        repo.create(new_user)
+        
+        users = repo.all
+
+        expect(users.length).to eq(4)
+        expect(users.last.name).to eq('Penny Lane')
+      end
+
+# 5
+# Logs user in if their email and password are correct
+     it 'returns true if details are correct' do
+        repo = UserRepository.new
+        
+        users = repo.all
+        user = users.login('js@gmail.com', 'passwordJS')
+
+        expect(user.email).to eq true
+        expect(user.password).to eq true
+
+      end
 
 
 Encode this example as a test.

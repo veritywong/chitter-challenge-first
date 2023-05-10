@@ -23,22 +23,6 @@ RSpec.describe UserRepository do
         expect(users.first.name).to eq('John Smith')
       end 
 
-      it 'creates a new user' do
-        repo = UserRepository.new
-    
-        new_user = User.new
-        new_user.name = 'Penny Lane'
-        new_user.username = 'PLane'
-        new_user.email = 'pl@gmail.com'
-        new_user.password = 'password4'
-        repo.create(new_user)
-        
-        users = repo.all
-
-        expect(users.length).to eq(4)
-        expect(users.last.name).to eq('Penny Lane')
-      end
-
       it 'finds user 1' do
         repo = UserRepository.new
 
@@ -57,6 +41,38 @@ RSpec.describe UserRepository do
         expect(peep.id).to eq(1)
         expect(peep.time).to eq('2023-01-08 10:30:00')
       end
+
+      it 'creates a new user' do
+        repo = UserRepository.new
+    
+        new_user = User.new
+        new_user.name = 'Penny Lane'
+        new_user.username = 'PLane'
+        new_user.email = 'pl@gmail.com'
+        new_user.password = 'password4'
+        repo.create(new_user)
+        
+        users = repo.all
+
+        expect(users.length).to eq(4)
+        expect(users.last.name).to eq('Penny Lane')
+      end
+
+      it 'signs in user' do
+        repo = UserRepository.new
+        new_user = User.new
+        new_user.name = 'Penny Lane'
+        new_user.username = 'PLane'
+        new_user.email = 'pl@gmail.com'
+        new_user.password = 'password4'
+        repo.create(new_user)
+
+        expect(repo.sign_in('pl@gmail.com', 'password4')).to eq true
+        expect(repo.sign_in('pl@gmail.com', 'passw0rd4')).to eq false
+        
+      end
+
     end
 
 end
+
