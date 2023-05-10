@@ -47,6 +47,17 @@ describe Application do
     end
   end
 
+  context 'POST /login' do
+    it 'if login in details correct it returns confirmation of login' do
+      response = post('/login', email: 'pl@gmail.com', password: 'password4')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<h1>Welcome back</h1>')
+      expect(response.body).to include('<a href="/shoutybox">Shouty Box<br>- see what people are peeping</a>')
+
+    end
+  end
+
   context 'GET /signup' do
     it 'returns signup page' do
         response = get('/signup')

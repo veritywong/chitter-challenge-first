@@ -23,9 +23,18 @@ class Application < Sinatra::Base
     return erb(:login)
   end
 
-  # post '/login' do
-  #   return erb(:shoutybox)
-  # end
+  post '/login' do
+    users = UserRepository.new
+    user = User.new
+    user.email = params[:email]
+    user.password = params[:password]
+
+    success = users.sign_in(user.email, user.password)
+
+    if success = true
+      return erb(:login_confirmation)
+    end
+  end
 
   get '/signup' do
     return erb(:signup)
