@@ -31,7 +31,7 @@ class Application < Sinatra::Base
 
     success = users.sign_in(user.email, user.password)
 
-    if success = true
+    if success == true
       return erb(:login_confirmation)
     end
   end

@@ -1,36 +1,53 @@
-# file: lib/user_repository.rb
+class Application < Sinatra::Base 
+  # Sessions are disabled by default, so this line is needed.
+  enable :sessions
 
-class UserRepository
-    def create(new_user)
-      # Encrypt the password to save it into the new database record.
-      encrypted_password = BCrypt::Password.create(new_user.password)
-  
-      sql = '
-        INSERT INTO users (email, password)
-          VALUES($1, $2);
-      '
-      sql_params = [
-        new_user.email,
-        encrypted_password
-      ]
-    end
-  
-    def sign_in(email, submitted_password)
-      user = find_by_email(email)
-  
-      return nil if user.nil?
-  
-      # Compare the submitted password with the encrypted one saved in the database
-      stored_password = BCrypt::Password.new(user.password)
-      if stored_password == submitted_password
-        # login success
-        return true
-      else
-        # wrong password
-      end
-    end
-  
-    def find_by_email(email)
-      # ...
+  configure :development do
+    register Sinatra::Reloader
+  end
+
+  # This route simply returns the login page
+  get '/login' do
+    return erb(:login)
+  end
+
+  # This route receives login information (email and password)
+  # as body parameters, and find the user in the database
+  # using the email. If the password matches, it returns
+  # a success page.
+  post '/login' do
+    email = params[:email]
+    password = params[:password]
+
+    user = UserRepository.find_by_email(email)
+
+    # This is a simplified way of 
+    # checking the password. In a real 
+    # project, you should encrypt the password
+    # stored in the database.
+    if user.password == password
+      # Set the user ID in session
+      session[:user_id] = user.id
+
+      return erb(:login_success)
+    else
+      return erb(:login_error)
     end
   end
+
+  # This route is an example
+  # of a "authenticated-only" route.
+  # It can be accessed only if a user is
+  # signed-in (if we have user information in session).
+  get '/account_page' do
+    if session[:user_id] == nil
+      # No user id in the session
+      # so the user is not logged in.
+      return redirect('/login')
+    else
+      # The user is logged in, display 
+      # their account page.
+      return erb(:account)
+    end
+  end
+end
