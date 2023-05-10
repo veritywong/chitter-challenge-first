@@ -81,4 +81,26 @@ describe Application do
     end
   end
 
+  context 'GET /peep/new' do
+    it 'returns form to create a new peep' do
+        response = get('/peep/new')
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h2>new peep</h2>')
+        expect(response.body).to include('<label>peep</label>')
+        expect(response.body).to include('<input type="text" name="peep">')
+        expect(response.body).to include('<input type="timestamp" name="time">')
+        expect(response.body).to include('<input type="int" name="user_id">')
+    end
+  end
+
+  context 'POST /peep' do
+    it 'posts a new peep' do
+        response = post('/peep', peep: 'Hello World!', time:'2023-01-10 10:30:00', user_id: '3')
+        expect(response.status).to eq(200)
+        # expect(response.body).to include('<h1>You have successfully signed up with Chitter</h1>')
+        # expect(response.body).to include('<a href="/shoutybox">Shouty Box<br>- see what people are peeping</a>')
+
+    end
+  end
+
 end

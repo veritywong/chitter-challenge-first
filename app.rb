@@ -54,5 +54,22 @@ class Application < Sinatra::Base
     return erb(:shoutybox)
   end
 
+  get '/peep/new' do
+    return erb(:peep_new)
+  end
+
+  post '/peep' do
+    posts = PostRepository.new
+    new_post = Post.new
+
+    new_post.peep = params[:peep]
+    new_post.time = params[:time]
+    new_post.user_id = params[:user_id]
+    
+    posts.create(new_post)
+
+    return erb(:peep_confirmation)
+  end
+
 
 end

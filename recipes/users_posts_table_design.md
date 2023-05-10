@@ -43,11 +43,8 @@ I want to receive an email if I am tagged in a Peep
 ```
 Nouns:
 
-post, message (peep), time, user, user_name, tags
+post, message (peep), time, user, user_name, (tags - in many to many recipe)
 
-methods - 
-posts: see all messages (most recent first)
-user: sign-up, log-in, log-out,
 ```
 
 ## 2. Infer the Table Name and Columns
@@ -58,7 +55,7 @@ Put the different nouns in this table. Replace the example with your own nouns.
 | --------------------- | ------------------  |
 | users                 | name, username, email, password
 | posts                 | message (peep), time, tags
-| tags                  | username
+|                       | 
 
 1. Name of the first table (always plural): `users` 
 
@@ -89,7 +86,7 @@ password: varchar
 Table: posts
 id: SERIAL
 peep: text
-time: date
+time: timestamp
 ```
 
 ## 4. Decide on The Tables Relationship
@@ -112,14 +109,14 @@ Replace the relevant bits in this example with your own:
 ```
 # EXAMPLE
 
-1. Can one artist have many albums? YES
-2. Can one album have many artists? NO
+1. Can one user have many posts? YES
+2. Can one post have many users? NO
 
 -> Therefore,
--> An artist HAS MANY albums
--> An album BELONGS TO an artist
+-> An user HAS MANY posts
+-> An post BELONGS TO an user
 
--> Therefore, the foreign key is on the albums table.
+-> Therefore, the foreign key is on the post table.
 ```
 
 *If you can answer YES to the two questions, you'll probably have to implement a Many-to-Many relationship, which is more complex and needs a third table (called a join table).*
@@ -127,26 +124,25 @@ Replace the relevant bits in this example with your own:
 ## 4. Write the SQL.
 
 ```sql
--- EXAMPLE
--- file: albums_table.sql
+-- file: seeds.sql
 
--- Replace the table name, columm names and types.
-
--- Create the table without the foreign key first.
-CREATE TABLE artists (
+CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   name text,
+  username text,
+  email text,
+  password varchar
 );
 
--- Then the table with the foreign key first.
-CREATE TABLE albums (
+DROP TABLE IF EXISTS posts CASCADE;
+-- Create the second table.
+CREATE TABLE posts (
   id SERIAL PRIMARY KEY,
-  title text,
-  release_year int,
--- The foreign key name is always {other_table_singular}_id
-  artist_id int,
-  constraint fk_artist foreign key(artist_id)
-    references artists(id)
+  peep text,
+  time timestamp,
+  user_id int,
+  constraint fk_user foreign key(user_id)
+    references users(id)
     on delete cascade
 );
 
@@ -155,7 +151,7 @@ CREATE TABLE albums (
 ## 5. Create the tables.
 
 ```bash
-psql -h 127.0.0.1 database_name < albums_table.sql
+psql -h 127.0.0.1 database_name < seeds.sql
 ```
 
 <!-- BEGIN GENERATED SECTION DO NOT EDIT -->
