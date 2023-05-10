@@ -58,6 +58,15 @@ describe Application do
     end
   end
 
+  context 'GET /account_page' do
+    it 'lets user make a new peep if session in progress' do
+      response = get('/account_page')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<h1>Your account</h1>')
+    end
+  end
+
   context 'GET /signup' do
     it 'returns signup page' do
         response = get('/signup')

@@ -32,7 +32,20 @@ class Application < Sinatra::Base
     success = users.sign_in(user.email, user.password)
 
     if success == true
-      return erb(:login_confirmation)
+      session[:user_id] = user.id
+      return erb(:login_success)
+    end
+  end
+
+  get '/account_page' do
+    if session[:user_id] == nil
+      # No user id in the session
+      # so the user is not logged in.
+      return redirect('/login')
+    else
+      # The user is logged in, display 
+      # their account page.
+      return erb(:account)
     end
   end
 
