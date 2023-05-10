@@ -2,7 +2,7 @@ require "spec_helper"
 require "rack/test"
 require_relative '../app'
 
-describe Application do
+RSpec.describe Application do
   # This is so we can use rack-test helper methods.
   include Rack::Test::Methods
 
@@ -49,7 +49,7 @@ describe Application do
 
   context 'POST /login' do
     it 'if login in details correct it returns confirmation of login' do
-      response = post('/login', email: 'pl@gmail.com', password: 'password4')
+      response = post('/login', email: 'js@gmail.com', password: 'passwordJS')
 
       expect(response.status).to eq(200)
       expect(response.body).to include('<h1>Welcome back</h1>')
@@ -92,7 +92,7 @@ describe Application do
   end
 
   context 'GET /shoutybox' do
-    it 'returns page with peeps in revers chronological order' do
+    it 'returns page with peeps in reverse chronological order' do
         response = get('/shoutybox')
 
         expect(response.status).to eq(200)

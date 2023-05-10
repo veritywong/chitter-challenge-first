@@ -6,9 +6,11 @@ require_relative 'lib/user_repository'
 require_relative 'lib/post_repository'
 
 
-DatabaseConnection.connect('chitter_challenge_test')
+DatabaseConnection.connect('chitter_challenge')
 
 class Application < Sinatra::Base
+  enable :sessions
+
   configure :development do
     register Sinatra::Reloader
     also_reload 'lib/user_repository'
@@ -24,16 +26,33 @@ class Application < Sinatra::Base
   end
 
   post '/login' do
-    users = UserRepository.new
-    user = User.new
-    user.email = params[:email]
-    user.password = params[:password]
+    # users = UserRepository.new
+    # user = User.new
+    # user.email = params[:email]
+    # user.password = params[:password]
 
-    success = users.sign_in(user.email, user.password)
+    # success = users.sign_in(user.email, user.password)
 
-    if success == true
+    # if success == true
+    #   session[:user_id] = user.id
+    #   return erb(:login_success)
+    # end
+    email = params[:email]
+    password = params[:password]
+    repo = UserRepository.new
+    user = repo.find_by_email(email)
+
+    # This is a simplified way of 
+    # checking the password. In a real 
+    # project, you should encrypt the password
+    # stored in the database.
+    if password == user.password
+      # Set the user ID in session
       session[:user_id] = user.id
+
       return erb(:login_success)
+    else
+      return erb(:login_error)
     end
   end
 
@@ -92,6 +111,5 @@ class Application < Sinatra::Base
 
     return erb(:peep_confirmation)
   end
-
-
 end
+

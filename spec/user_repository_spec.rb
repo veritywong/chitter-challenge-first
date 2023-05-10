@@ -1,12 +1,17 @@
 require 'user_repository'
 require 'user'
 
-
 RSpec.describe UserRepository do
   def reset_users_table
       seed_sql = File.read('spec/seeds.sql')
       connection = PG.connect({ host: '127.0.0.1', dbname: 'chitter_challenge_test' })
       connection.exec(seed_sql)
+  end
+
+  def reset_posts_table
+    seed_sql = File.read('spec/seeds.sql')
+    connection = PG.connect({ host: '127.0.0.1', dbname: 'chitter_challenge_test' })
+    connection.exec(seed_sql)
   end
       
     describe UserRepository do
