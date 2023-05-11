@@ -65,8 +65,12 @@ class UserRepository
       return nil if user.nil?
 
       encrypted_password = BCrypt::Password.new(user.password)
+      password = user.password
+
       if encrypted_password == submitted_password
         return true
+      # elsif password == submitted_password
+      #   return true
       else
         return false
       end

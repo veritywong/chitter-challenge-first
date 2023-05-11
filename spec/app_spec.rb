@@ -42,14 +42,23 @@ RSpec.describe Application do
         expect(response.status).to eq(200)
         expect(response.body).to include('<h1>Login</h1>')
         expect(response.body).to include('<form action="/login" method="POST">')
-        expect(response.body).to include('<input type="text" name="email">')
-        expect(response.body).to include('<input type="text" name="password">')
+        expect(response.body).to include('<input type="email" name="email">')
+        expect(response.body).to include('<input type="password" name="password">')
     end
   end
 
   context 'POST /login' do
-    it 'if login in details correct it returns confirmation of login' do
+    xit 'if login in details correct it returns confirmation of login' do
       response = post('/login', email: 'js@gmail.com', password: 'passwordJS')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<h1>Welcome back</h1>')
+      expect(response.body).to include('<a href="/shoutybox">Shouty Box<br>- see what people are peeping</a>')
+
+    end
+
+    it 'if login in details correct it returns confirmation of login' do
+      response = post('/login', email: 'pl@gmail.com', password: 'password4')
 
       expect(response.status).to eq(200)
       expect(response.body).to include('<h1>Welcome back</h1>')
@@ -59,11 +68,21 @@ RSpec.describe Application do
   end
 
   context 'GET /account_page' do
-    it 'lets user make a new peep if session in progress' do
+    # test for non-encrypted password
+    xit 'lets user make a new peep if session in progress' do
+      response = post('/login', email: 'js@gmail.com', password: 'passwordJS')
       response = get('/account_page')
-
+     
       expect(response.status).to eq(200)
       expect(response.body).to include('<h1>Your account</h1>')
+    end
+
+    it 'lets user make a new peep if session in progress' do
+      response = post('/login', email: 'pl@gmail.com', password: 'password4')
+      response = get('/account_page')
+     
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<h1>my account</h1>')
     end
   end
 

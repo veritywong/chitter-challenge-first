@@ -74,7 +74,6 @@ RSpec.describe UserRepository do
 
         expect(repo.sign_in('pl@gmail.com', 'password4')).to eq true
         expect(repo.sign_in('pl@gmail.com', 'passw0rd4')).to eq false
-        
       end
 
     end

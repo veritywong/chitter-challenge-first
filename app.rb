@@ -6,7 +6,7 @@ require_relative 'lib/user_repository'
 require_relative 'lib/post_repository'
 
 
-DatabaseConnection.connect('chitter_challenge')
+DatabaseConnection.connect
 
 class Application < Sinatra::Base
   enable :sessions
@@ -26,44 +26,44 @@ class Application < Sinatra::Base
   end
 
   post '/login' do
-    # users = UserRepository.new
-    # user = User.new
-    # user.email = params[:email]
-    # user.password = params[:password]
-
-    # success = users.sign_in(user.email, user.password)
-
-    # if success == true
-    #   session[:user_id] = user.id
-    #   return erb(:login_success)
-    # end
     email = params[:email]
     password = params[:password]
     repo = UserRepository.new
-    user = repo.find_by_email(email)
+    @user = repo.find_by_email(email)
 
-    # This is a simplified way of 
-    # checking the password. In a real 
-    # project, you should encrypt the password
-    # stored in the database.
-    if password == user.password
-      # Set the user ID in session
-      session[:user_id] = user.id
+    login_result = repo.sign_in(email, password)
 
+    if login_result == true
+      session[:user_id] = @user.id
       return erb(:login_success)
     else
       return erb(:login_error)
     end
+
+### demo version withou encrypted passwords
+    # email = params[:email]
+    # password = params[:password]
+    # repo = UserRepository.new
+    # user = repo.find_by_email(email)
+
+    # # This is a simplified way of 
+    # # checking the password. In a real 
+    # # project, you should encrypt the password
+    # # stored in the database.
+    # if password == user.password
+    #   # Set the user ID in session
+    #   session[:user_id] = user.id
+
+    #   return erb(:login_success)
+    # else
+    #   return erb(:login_error)
+    # end
   end
 
   get '/account_page' do
     if session[:user_id] == nil
-      # No user id in the session
-      # so the user is not logged in.
       return redirect('/login')
     else
-      # The user is logged in, display 
-      # their account page.
       return erb(:account)
     end
   end
