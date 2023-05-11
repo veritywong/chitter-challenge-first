@@ -29,43 +29,31 @@ class Application < Sinatra::Base
   post '/login' do
     email = params[:email]
     password = params[:password]
+
+    if email == '' || password == ''
+      status 400
+      return erb(:login_error)
+    end
+
     repo = UserRepository.new
     user = repo.find_by_email(email)
 
     login_result = repo.sign_in(email, password)
-
+   
     if login_result == true
       session[:user_id] = user.id
       return erb(:login_success)
     else
       return erb(:login_error)
     end
-
-### demo version withou encrypted passwords
-    # email = params[:email]
-    # password = params[:password]
-    # repo = UserRepository.new
-    # user = repo.find_by_email(email)
-
-    # # This is a simplified way of 
-    # # checking the password. In a real 
-    # # project, you should encrypt the password
-    # # stored in the database.
-    # if password == user.password
-    #   # Set the user ID in session
-    #   session[:user_id] = user.id
-
-    #   return erb(:login_success)
-    # else
-    #   return erb(:login_error)
-    # end
   end
 
   get '/account_page' do
-    @user = session[:user_id]
+    
     if session[:user_id] == nil
       return redirect('/login')
     else
+      @user = UserRepository.new.find(session[:user_id])
       return erb(:account)
     end
   end
@@ -85,7 +73,14 @@ class Application < Sinatra::Base
 
     users.create(new_user)
 
-    return erb(:signup_confirmation)
+    if new_user.name == '' || new_user.name == '<script>' || 
+      new_user.username == '' || new_user.username == '<script>'
+      status 400
+      return erb(:signup_error)
+    else
+      return erb(:signup_confirmation)
+    end
+
   end
 
   get '/shoutybox' do
@@ -111,12 +106,18 @@ class Application < Sinatra::Base
     
     posts.create(new_post)
 
-    return erb(:peep_confirmation)
+    if new_post.peep == '' || new_post.peep == '<script>'
+      status 400
+      return erb(:peep_new)
+    else
+      return erb(:peep_confirmation)
+    end
   end
 
-  def invalid_request_parameters?
-    return (params[:title] == nil || params[:release_year] == nil || 
-    params[:artist_id] == nil)
+  get '/logout' do
+    session[:user_id] = nil
+    return erb(:index)
   end
+
 end
 

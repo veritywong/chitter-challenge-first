@@ -29,9 +29,9 @@ RSpec.describe Application do
         
         expect(response.status).to eq(200)
         expect(response.body).to include('<h1>Welcome to Chitter</h1>')
-        expect(response.body).to include('<a href="/login">Login</a><br>')
+        expect(response.body).to include('<a href="/login">Login</a>')
         expect(response.body).to include('<a href="/signup">Signup</a><br>')
-        expect(response.body).to include('<a href="/shoutybox">Shouty Box<br>- see what people are peeping</a>')
+        expect(response.body).to include('<a href="/shoutybox">Shouty Box - see what people are peeping </a>')
     end
   end
 
@@ -53,16 +53,25 @@ RSpec.describe Application do
 
       expect(response.status).to eq(200)
       expect(response.body).to include('<h1>Welcome back</h1>')
-      expect(response.body).to include('<a href="/shoutybox">Shouty Box<br>- see what people are peeping</a>')
+      expect(response.body).to include('<a href="/shoutybox">Shouty Box - see what people are peeping</a>')
 
     end
 
-    it 'if login in details correct it returns confirmation of login' do
+    it 'if login details correct it returns confirmation of login' do
       response = post('/login', email: 'pl@gmail.com', password: 'password4')
 
       expect(response.status).to eq(200)
       expect(response.body).to include('<h1>Welcome back</h1>')
-      expect(response.body).to include('<a href="/shoutybox">Shouty Box<br>- see what people are peeping</a>')
+      expect(response.body).to include('<a href="/shoutybox">Shouty Box - see what people are peeping</a><br>')
+
+    end
+
+    it 'if incorrect login returns user to login error page' do
+      response = post('/login', email: '', password: '')
+
+      expect(response.status).to eq(400)
+      expect(response.body).to include('<h1>Login Error please try again</h1>')
+      expect(response.body).to include('<form action="/login" method="POST">')
 
     end
   end
@@ -82,7 +91,7 @@ RSpec.describe Application do
       response = get('/account_page')
      
       expect(response.status).to eq(200)
-      expect(response.body).to include('<h1>my account</h1>')
+      expect(response.body).to include('<h2>my peeps</h2>')
     end
   end
 
@@ -107,6 +116,28 @@ RSpec.describe Application do
         expect(response.body).to include('<h1>You have successfully signed up with Chitter</h1>')
         expect(response.body).to include('<a href="/shoutybox">Shouty Box<br>- see what people are peeping</a>')
 
+    end
+
+    it 'returns to singup page if wrong inputs' do
+      response = post('/signup', name: '', username: '', email: 'piplong@gmail.com', password: 'password_test')
+
+      expect(response.status).to eq(400)
+      expect(response.body).to include('<h1>Signup</h1>')
+      expect(response.body).to include('<input type="text" name="name">')        
+      expect(response.body).to include('<input type="text" name="username">')
+      expect(response.body).to include('<input type="text" name="email">')
+      expect(response.body).to include('<input type="text" name="password">')
+    end
+
+    it 'returns to singup page if wrong inputs' do
+      response = post('/signup', name: '<script>', username: '<script>', email: 'piplong@gmail.com', password: 'password_test')
+
+      expect(response.status).to eq(400)
+      expect(response.body).to include('<h1>Signup</h1>')
+      expect(response.body).to include('<input type="text" name="name">')        
+      expect(response.body).to include('<input type="text" name="username">')
+      expect(response.body).to include('<input type="text" name="email">')
+      expect(response.body).to include('<input type="text" name="password">')
     end
   end
 
@@ -139,6 +170,34 @@ RSpec.describe Application do
         # expect(response.body).to include('<h1>You have successfully signed up with Chitter</h1>')
         # expect(response.body).to include('<a href="/shoutybox">Shouty Box<br>- see what people are peeping</a>')
 
+    end
+
+    it 'returns to post peep page if input not vaild' do
+      response = post('/peep', peep:'', time:'2023-01-10 10:30:00', user_id: '3')
+
+      expect(response.status).to eq(400)
+      expect(response.body).to include('<h2>new peep</h2>')
+      expect(response.body).to include('<label>peep</label>')
+      expect(response.body).to include('<input type="text" name="peep">')
+    end
+
+    it 'returns to post peep page if input not vaild' do
+      response = post('/peep', peep:'<script>', time:'2023-01-10 10:30:00', user_id: '3')
+
+      expect(response.status).to eq(400)
+      expect(response.body).to include('<h2>new peep</h2>')
+      expect(response.body).to include('<label>peep</label>')
+      expect(response.body).to include('<input type="text" name="peep">')
+    end
+  end
+
+  context 'GET /logout' do
+    it 'logs user out by ending session' do
+      response = post('/login', email: 'pl@gmail.com', password: 'password4')
+      response = get('/logout')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<h1>Welcome to Chitter</h1>')
     end
   end
 

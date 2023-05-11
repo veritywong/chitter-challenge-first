@@ -11,6 +11,15 @@
       <% end %>
         
       <a href="/">back to homepage</a>
+          <% if session[:user_id] == nil %>
+            <a href="/login">Login</a>
+            <a href="/signup">Signup</a><br>
+          
+          <% else %>
+            <a href="/peep/new">new peep</a>
+            <a href="/logout">Logout</a><br>
+
+          <%end%>
     </body>
 
 </html>

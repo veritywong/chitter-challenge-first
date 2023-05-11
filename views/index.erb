@@ -3,10 +3,18 @@
     <body>
 
     <h1>Welcome to Chitter</h1>
+    <% if session[:user_id] == nil %>
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a><br>
+    <% else %>
+    <a href="/peep/new">new peep</a>
+    <a href="/account">Logout</a><br>
+    <a href="/logout">Logout</a><br>
 
-    <a href="/login">Login</a><br>
-    <a href="/signup">Signup</a><br>
-    <a href="/shoutybox">Shouty Box<br>- see what people are peeping</a>
+    <%end%>
+
+
+    <a href="/shoutybox">Shouty Box - see what people are peeping </a>
     </body>
 
 </html>
