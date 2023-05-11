@@ -127,8 +127,8 @@ RSpec.describe Application do
         expect(response.body).to include('<h2>new peep</h2>')
         expect(response.body).to include('<label>peep</label>')
         expect(response.body).to include('<input type="text" name="peep">')
-        expect(response.body).to include('<input type="timestamp" name="time">')
-        expect(response.body).to include('<input type="int" name="user_id">')
+        # expect(response.body).to include('<input type="timestamp" name="time">')
+        # expect(response.body).to include('<input type="int" name="user_id">')
     end
   end
 

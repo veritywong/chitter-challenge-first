@@ -1,6 +1,7 @@
 # file: app.rb
 require 'sinatra/base'
 require 'sinatra/reloader'
+require 'time'
 require_relative 'lib/database_connection'
 require_relative 'lib/user_repository'
 require_relative 'lib/post_repository'
@@ -29,12 +30,12 @@ class Application < Sinatra::Base
     email = params[:email]
     password = params[:password]
     repo = UserRepository.new
-    @user = repo.find_by_email(email)
+    user = repo.find_by_email(email)
 
     login_result = repo.sign_in(email, password)
 
     if login_result == true
-      session[:user_id] = @user.id
+      session[:user_id] = user.id
       return erb(:login_success)
     else
       return erb(:login_error)
@@ -61,6 +62,7 @@ class Application < Sinatra::Base
   end
 
   get '/account_page' do
+    @user = session[:user_id]
     if session[:user_id] == nil
       return redirect('/login')
     else
@@ -104,12 +106,17 @@ class Application < Sinatra::Base
     new_post = Post.new
 
     new_post.peep = params[:peep]
-    new_post.time = params[:time]
-    new_post.user_id = params[:user_id]
+    new_post.time = Time.now
+    new_post.user_id = session[:user_id]
     
     posts.create(new_post)
 
     return erb(:peep_confirmation)
+  end
+
+  def invalid_request_parameters?
+    return (params[:title] == nil || params[:release_year] == nil || 
+    params[:artist_id] == nil)
   end
 end
 
