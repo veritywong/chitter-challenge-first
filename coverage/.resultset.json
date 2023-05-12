@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/Verity/Projects/week_4/chitter-challenge/spec/app_spec.rb": [
+      "/Users/Verity/Projects/week_4/chitter-challenge-first/spec/app_spec.rb": [
         1,
         1,
         1,
@@ -207,7 +207,7 @@
         null,
         null
       ],
-      "/Users/Verity/Projects/week_4/chitter-challenge/app.rb": [
+      "/Users/Verity/Projects/week_4/chitter-challenge-first/app.rb": [
         null,
         1,
         1,
@@ -332,7 +332,7 @@
         null,
         null
       ],
-      "/Users/Verity/Projects/week_4/chitter-challenge/lib/user_repository.rb": [
+      "/Users/Verity/Projects/week_4/chitter-challenge-first/lib/user_repository.rb": [
         1,
         1,
         null,
@@ -433,7 +433,7 @@
         null,
         null
       ],
-      "/Users/Verity/Projects/week_4/chitter-challenge/lib/user.rb": [
+      "/Users/Verity/Projects/week_4/chitter-challenge-first/lib/user.rb": [
         null,
         null,
         null,
@@ -457,7 +457,7 @@
         null,
         null
       ],
-      "/Users/Verity/Projects/week_4/chitter-challenge/lib/post_repository.rb": [
+      "/Users/Verity/Projects/week_4/chitter-challenge-first/lib/post_repository.rb": [
         1,
         1,
         null,
@@ -520,12 +520,12 @@
         null,
         null
       ],
-      "/Users/Verity/Projects/week_4/chitter-challenge/lib/post.rb": [
+      "/Users/Verity/Projects/week_4/chitter-challenge-first/lib/post.rb": [
         1,
         1,
         null
       ],
-      "/Users/Verity/Projects/week_4/chitter-challenge/spec/post_repository_spec.rb": [
+      "/Users/Verity/Projects/week_4/chitter-challenge-first/spec/post_repository_spec.rb": [
         1,
         1,
         null,
@@ -577,7 +577,7 @@
         null,
         null
       ],
-      "/Users/Verity/Projects/week_4/chitter-challenge/spec/user_repository_spec.rb": [
+      "/Users/Verity/Projects/week_4/chitter-challenge-first/spec/user_repository_spec.rb": [
         1,
         1,
         null,
@@ -662,6 +662,6 @@
         null
       ]
     },
-    "timestamp": 1683821725
+    "timestamp": 1683885422
   }
 }

@@ -103,8 +103,8 @@ RSpec.describe Application do
         expect(response.body).to include('<h1>Signup</h1>')
         expect(response.body).to include('<input type="text" name="name">')        
         expect(response.body).to include('<input type="text" name="username">')
-        expect(response.body).to include('<input type="text" name="email">')
-        expect(response.body).to include('<input type="text" name="password">')
+        expect(response.body).to include('<input type="email" name="email">')
+        expect(response.body).to include('<input type="password" name="password">')
     end
   end
 
